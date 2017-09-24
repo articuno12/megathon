@@ -1,0 +1,6 @@
+text = [ "how many tickets are open ?",
+         "how many tickets have low proiority ?",
+         "What is the median ticket number for google test ?",
+         "what is the average time spent on tickets ?",
+         "What percentage of tickets are still open ?",
+         "What is the max time spent on closed tickets ?"]

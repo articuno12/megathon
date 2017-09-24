@@ -1,0 +1,22 @@
+temp = []
+temp = []
+temp = [{'type': 'user_typing', 'channel': 'D77U8FKV3', 'user': 'U78SR2Z7H'}]
+temp = [{'channel': 'D77U8FKV3', 'text': '8', 'type': 'message', 'team': 'T7750H09W', 'user': 'U78SR2Z7H', 'ts': '1506196518.000024', 'source_team': 'T7750H09W'}]
+something here
+temp = [{'channel': 'D77U8FKV3', 'imageUri': None, 'is_shared': False, 'launchUri': 'slack://channel?id=D77U8FKV3&message=1506196518000024&team=T7750H09W', 'type': 'desktop_notification', 'avatarImage': 'https://secure.gravatar.com/avatar/27a6a6cdad00d0715cc617f3b2cd7949.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2F7fa9%2Fimg%2Favatars%2Fava_0005-192.png', 'title': 'WeAreExpensive', 'subtitle': 'Aakash', 'content': '8', 'event_ts': '1506196518.000015', 'msg': '1506196518.000024', 'ssbFilename': 'knock_brush.mp3'}]
+temp = [{'bot_id': 'B78SRAYVD', 'event_ts': '1506196519.000056', 'username': 'Itsupport', 'text': 'Hello from Python! :tada:', 'type': 'message', 'team': 'T7750H09W', 'subtype': 'bot_message', 'channel': 'D77U8FKV3', 'ts': '1506196519.000056'}]
+something here
+temp = [{'channel': 'D77U8FKV3', 'imageUri': None, 'is_shared': False, 'launchUri': 'slack://channel?id=D77U8FKV3&message=1506196519000056&team=T7750H09W', 'type': 'desktop_notification', 'avatarImage': 'https://secure.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2F7fa9%2Fimg%2Favatars%2Fava_0000-192.png', 'title': 'WeAreExpensive', 'subtitle': 'Itsupport (bot)', 'content': 'Hello from Python! :tada:', 'event_ts': '1506196519.000100', 'msg': '1506196519.000056', 'ssbFilename': 'knock_brush.mp3'}]
+temp = [{'bot_id': 'B78SRAYVD', 'event_ts': '1506196522.000030', 'username': 'Itsupport', 'text': 'Hello from Python! :tada:', 'type': 'message', 'team': 'T7750H09W', 'subtype': 'bot_message', 'channel': 'D77U8FKV3', 'ts': '1506196522.000030'}]
+something here
+temp = [{'channel': 'D77U8FKV3', 'imageUri': None, 'is_shared': False, 'launchUri': 'slack://channel?id=D77U8FKV3&message=1506196522000030&team=T7750H09W', 'type': 'desktop_notification', 'avatarImage': 'https://secure.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2F7fa9%2Fimg%2Favatars%2Fava_0000-192.png', 'title': 'WeAreExpensive', 'subtitle': 'Itsupport (bot)', 'content': 'Hello from Python! :tada:', 'event_ts': '1506196522.000036', 'msg': '1506196522.000030', 'ssbFilename': 'knock_brush.mp3'}]
+temp = [{'bot_id': 'B78SRAYVD', 'event_ts': '1506196524.000089', 'username': 'Itsupport', 'text': 'Hello from Python! :tada:', 'type': 'message', 'team': 'T7750H09W', 'subtype': 'bot_message', 'channel': 'D77U8FKV3', 'ts': '1506196524.000089'}]
+something here
+temp = [{'channel': 'D77U8FKV3', 'imageUri': None, 'is_shared': False, 'launchUri': 'slack://channel?id=D77U8FKV3&message=1506196524000089&team=T7750H09W', 'type': 'desktop_notification', 'avatarImage': 'https://secure.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2F7fa9%2Fimg%2Favatars%2Fava_0000-192.png', 'title': 'WeAreExpensive', 'subtitle': 'Itsupport (bot)', 'content': 'Hello from Python! :tada:', 'event_ts': '1506196525.000010', 'msg': '1506196524.000089', 'ssbFilename': 'knock_brush.mp3'}]
+temp = [{'bot_id': 'B78SRAYVD', 'event_ts': '1506196527.000015', 'username': 'Itsupport', 'text': 'Hello from Python! :tada:', 'type': 'message', 'team': 'T7750H09W', 'subtype': 'bot_message', 'channel': 'D77U8FKV3', 'ts': '1506196527.000015'}]
+something here
+temp = [{'channel': 'D77U8FKV3', 'imageUri': None, 'is_shared': False, 'launchUri': 'slack://channel?id=D77U8FKV3&message=1506196527000015&team=T7750H09W', 'type': 'desktop_notification', 'avatarImage': 'https://secure.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2F7fa9%2Fimg%2Favatars%2Fava_0000-192.png', 'title': 'WeAreExpensive', 'subtitle': 'Itsupport (bot)', 'content': 'Hello from Python! :tada:', 'event_ts': '1506196527.000035', 'msg': '1506196527.000015', 'ssbFilename': 'knock_brush.mp3'}]
+^CTraceback (most recent call last):
+  File "itsupport.py", line 48, in <module>
+    time.sleep(READ_WEBSOCKET_DELAY)
+

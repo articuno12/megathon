@@ -1,0 +1,24 @@
+{
+	"select": {
+		"column": "None",
+		"type": "None"
+	},
+	"from": {
+		"table": "chatbot"
+	},
+	"join": {
+	},
+	"where": {
+		"condition": [
+			{ "column": "client",
+			  "type": "None",
+			  "operator": "=",
+			  "value": "12"
+			}
+		]
+	},
+	"group_by": {
+	},
+	"order_by": {
+	}
+}
