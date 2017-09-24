@@ -5,7 +5,7 @@ import sys
 import requests
 
 from slackclient import SlackClient
-# from ln2sql import interface 
+from ln2sql import interface
 # starterbot's ID as an environment variable
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -113,6 +113,9 @@ def makequery(msg) :
     for row in cur.fetchall() :
         reply += row[0] + " " + row[1] + "\n"
     return reply
+
+def handlebasic(msg) :
+    return makequery(interface.sql_string(msg))
 
 if __name__ == "__main__":
     # Q = [ "how many tickets are open ?",
