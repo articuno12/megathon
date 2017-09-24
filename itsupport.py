@@ -5,7 +5,7 @@ import re
 import sys
 import requests
 import trend
-
+import client
 from slackclient import SlackClient
 from ln2sql import interface
 # starterbot's ID as an environment variable
@@ -142,7 +142,14 @@ def handlesentiment(msg) :
         while(l < len(msg) and msg[l] != 'client') : l += 1
         r = l
         while(r < len(msg) and msg[r] != 'based') : r += 1
-        ans = ' '.join(msg[l+1,r-1])
+        ans = ' '.join(msg[l+1:r])
+        print("client name is "+ans)
+        client.client_analysis(ans)
+        my_file = {'file' : ('./graph2.png', open('./graph2.png', 'rb'), 'png')}
+        slack_client.api_call('files.upload', channels=[slack_channel], filename='graph2.png', file= open('./graph2.png', 'rb'))
+        payload={ "filename":"graph2.png","token":os.environ.get('SLACK_BOT_TOKEN'),"channels":[slack_channel],}
+        r = requests.post("https://slack.com/api/files.upload", params=payload, files=my_file)
+        return ""
     else : return "Invalid Query"
 
 
@@ -155,8 +162,8 @@ def handletrend(msg) :
         ans = msg[l+1]
         trend.trend_analysis(int(ans))
         my_file = {'file' : ('./graph.png', open('./graph.png', 'rb'), 'png')}
-        slack_client.api_call('files.upload', channels=[slack_channel], filename='1.png', file= open('./graph.png', 'rb'))
-        payload={ "filename":"1.png","token":os.environ.get('SLACK_BOT_TOKEN'),"channels":[slack_channel],}
+        slack_client.api_call('files.upload', channels=[slack_channel], filename='graph.png', file= open('./graph.png', 'rb'))
+        payload={ "filename":"graph.png","token":os.environ.get('SLACK_BOT_TOKEN'),"channels":[slack_channel],}
         r = requests.post("https://slack.com/api/files.upload", params=payload, files=my_file)
         return ""
 
@@ -165,7 +172,7 @@ def handletrend(msg) :
         while(l < len(msg) and msg[l] != 'client') : l += 1
         r = l
         while(r < len(msg) and msg[r] != 'based') : r += 1
-        ans = ' '.join(msg[l+1,r-1])
+        ans = ' '.join(msg[l+1:r])
 
     else : return "Invalid Query"
 if __name__ == "__main__":
@@ -198,4 +205,4 @@ if __name__ == "__main__":
             reply = handlesentiment(msg)
         elif intent == 'trend' :
             reply = handletrend(msg)
-        if(len(reply) > 0) : sendmsgtouser("ans to the query is : " + reply)
+        if(reply and len(reply) > 0) : sendmsgtouser("ans to the query is : " + reply)
