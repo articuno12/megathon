@@ -4,6 +4,7 @@ import json
 import re
 import sys
 import requests
+import trend
 
 from slackclient import SlackClient
 from ln2sql import interface
@@ -152,6 +153,13 @@ def handletrend(msg) :
         l = 0
         while(msg[l] != "ticket") : l += 1
         ans = msg[l+1]
+        trend.trend_analysis(int(ans))
+        my_file = {'file' : ('./graph.png', open('./graph.png', 'rb'), 'png')}
+        slack_client.api_call('files.upload', channels=[slack_channel], filename='1.png', file= open('./graph.png', 'rb'))
+        payload={ "filename":"1.png","token":os.environ.get('SLACK_BOT_TOKEN'),"channels":[slack_channel],}
+        r = requests.post("https://slack.com/api/files.upload", params=payload, files=my_file)
+        return ""
+
     elif "client" in msg :
         l = 0
         while(l < len(msg) and msg[l] != 'client') : l += 1
@@ -179,6 +187,7 @@ if __name__ == "__main__":
     # r = requests.post("https://slack.com/api/files.upload", params=payload, files=my_file)
 
     # print(handlebasic("how many ticket of chatbot have status is equal to open"))
+    print("The game has begin")
     while True :
         msg = getmsgfromuser()
         reply = "None"
@@ -189,4 +198,4 @@ if __name__ == "__main__":
             reply = handlesentiment(msg)
         elif intent == 'trend' :
             reply = handletrend(msg)
-        sendmsgtouser("ans to the query is : " + reply)
+        if(len(reply) > 0) : sendmsgtouser("ans to the query is : " + reply)

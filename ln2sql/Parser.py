@@ -293,11 +293,11 @@ class WhereParser(Thread):
 
     def predict_junction(self, previous_column_offset, current_column_offset):
         interval_offset = range(previous_column_offset, current_column_offset)
-        junction = 'AND'
+        junction = 'and'
         if(len(self.intersect(interval_offset, self.disjunction_keyword_offset)) >= 1):
-            return 'OR'
+            return 'or'
         elif(len(self.intersect(interval_offset, self.junction_keyword_offset)) >= 1):
-            return 'AND'
+            return 'and'
 
         first_encountered_junction_offset = -1
         first_encountered_disjunction_offset = -1
@@ -313,9 +313,9 @@ class WhereParser(Thread):
                 break
 
         if first_encountered_junction_offset >= first_encountered_disjunction_offset:
-            return 'AND'
+            return 'and'
         else:
-            return 'OR'
+            return 'or'
 
     def run(self):
         number_of_where_columns = 0

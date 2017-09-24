@@ -1,0 +1,12 @@
+import MySQLdb
+db = MySQLdb.connect("localhost","root","the c-13","megathon")
+cursor = db.cursor()
+ticket = int(raw_input("ticket id = "))
+status = raw_input("status = ")
+severity = raw_input("severity = ")
+client = raw_input("client = ")
+data_open = raw_input("date open = ")
+time = int(raw_input("time = "))
+comments = raw_input("comments = ")
+cursor.execute("""INSERT INTO chatbot (ticket, status, severity, client, date_open,time,comments) VALUES(%s ,%s, %s,%s,%s,%s,%s)""", (int(ticket),status,severity,client,data_open,int(time),comments))
+db.commit()

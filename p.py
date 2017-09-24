@@ -1,5 +1,5 @@
 import csv
-f = open("./dataset_1.csv")
+f = open("./dataset_2.csv")
 reader = csv.reader(f)
 import MySQLdb
 db = MySQLdb.connect("localhost","root","the c-13","megathon")

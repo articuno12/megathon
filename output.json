@@ -1,13 +1,7 @@
 {
 	"select": {
-		"columns": [
-			{ "column": "ticket",
-			  "type": "None"
-			},
-			{ "column": "status",
-			  "type": "None"
-			}
-		]
+		"column": "status",
+		"type": "None"
 	},
 	"from": {
 		"table": "chatbot"
@@ -18,8 +12,8 @@
 		"condition": [
 			{ "column": "ticket",
 			  "type": "None",
-			  "operator": ">",
-			  "value": "20"
+			  "operator": "=",
+			  "value": "123459"
 			}
 		]
 	},
