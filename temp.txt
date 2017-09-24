@@ -1,0 +1,5 @@
+
+[1mSELECT [0m*
+[1mFROM [0mchatbot
+[1mWHERE[0m chatbot.status [1m=[0m open;
+

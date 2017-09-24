@@ -531,7 +531,10 @@ class Parser:
         for i in range(0, len(words)):
             if words[i] == "to" or words[i] == "than":
                 global VALUE
-                VALUE = words[i+1]
+                if words[i+1].isdigit():
+                    VALUE = words[i+1]
+                else:
+                    VALUE = '"'+words[i+1]+'"'
             if words[i] in self.database_dico:
                 if number_of_table == 0:
                     select_phrase = words[:i]

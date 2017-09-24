@@ -1,6 +1,7 @@
 import os
 import time
 import json
+import re
 import sys
 import requests
 
@@ -26,8 +27,8 @@ workspaceid2 = '62891bb2-84b0-4d98-8dc2-bb1ea0c6bad2'
 workspaceid1 = '78f78e3b-1cb3-4b95-a846-a4c4ce3c7c17'
 workspace2 = conversation.get_workspace(workspace_id=workspaceid2)
 
-# import MySQLdb
-# db = MySQLdb.connect("localhost","root","whyso123098","megathon")
+import MySQLdb
+db = MySQLdb.connect("localhost","root","the c-13","megathon")
 
 def parse_slack_output(output_list) :
     if output_list and len(output_list) > 0:
@@ -67,9 +68,9 @@ def learnintent(msg,workspaceid) :
     message_input = {'text': msg}
     response = conversation.message(workspace_id=workspaceid,message_input=message_input)
     if(len(response['intents']) == 0) :
-        valid = learnintent(msg)
+        valid = learnintent(msg,workspaceid)
     else : valid = response['intents'][0]['intent']
-    print("m = ",msg," v = ",valid)
+    # print("m = ",msg," v = ",valid)
     # conversation.create_example(workspace_id=workspaceid,intent=valid,text=msg)
     return valid
 
@@ -88,9 +89,12 @@ def processquery2(msg) :
 
     if(len(response['entities']) == 0) :
         learnentity(msg)
-    print(msg)
-    print(response['entities'])
-    print(response['intents'])
+    # print(msg)
+    # print(response['entities'])
+    # print(response['intents'])
+    intent = response['intents'][0]['intent']
+    entities = [ {"e":response['entities'][i]['entity'],"v":response['entities'][i]["value"]} for i in range(len(response['entities']))]
+    return intent , entities
 
 def processquery1(msg) :
     message_input = {'text': msg}
@@ -102,6 +106,7 @@ def processquery1(msg) :
         myintent = response['intents'][0]['intent']
 
     sendmsgtouser("Classified query as : " + myintent)
+    return myintent
 
 def makequery(msg) :
     # Create a Cursor object to execute queries.
@@ -110,13 +115,51 @@ def makequery(msg) :
     # Select data from table using SQL query.
     cur.execute(msg)
     reply = ""
+    # print(cur.fetchall())
     for row in cur.fetchall() :
-        reply += row[0] + " " + row[1] + "\n"
+        for i in range(len(row)) :
+            reply += str(row[i]) + " "
+        reply += "\n"
     return reply
 
 def handlebasic(msg) :
-    return makequery(interface.sql_string(msg))
+    temp = interface.sql_string(msg)
+    temp = re.sub(r'\x1b\[[0-9]m', '  ',temp )
+    temp = ' '.join(temp.split('\n'))
+    print("t = ",temp)
+    # intent, E = processquery2(msg)
+    # f1 = E[0]["e"]
+    # f2 = E[1]["e"]
+    # f2v = E[1]["v"]
+    # print(E)
+    return makequery(temp)
 
+def handlesentiment(msg) :
+    msg = msg.split(' ')
+    if "distribution" in msg :
+        l = 0
+        while(l < len(msg) and msg[l] != 'client') : l += 1
+        r = l
+        while(r < len(msg) and msg[r] != 'based') : r += 1
+        ans = ' '.join(msg[l+1,r-1])
+    else : return "Invalid Query"
+
+
+
+def handletrend(msg) :
+    msg = msg.split(' ')
+    if "ticket" in msg :
+        l = 0
+        while(msg[l] != "ticket") : l += 1
+        ans = msg[l+1]
+    elif "client" in msg :
+        l = 0
+        while(l < len(msg) and msg[l] != 'client') : l += 1
+        r = l
+        while(r < len(msg) and msg[r] != 'based') : r += 1
+        ans = ' '.join(msg[l+1,r-1])
+
+    else : return "Invalid Query"
 if __name__ == "__main__":
     # Q = [ "how many tickets are open ?",
     #          "how many tickets have low proiority ?",
@@ -129,21 +172,21 @@ if __name__ == "__main__":
     #          "how many tickets were raised by ltd ?",
     #          "how many tickets by google are still open ?",
     #     ]
-    # for q in Q :
-    #     processquery2(q)
-    # files = {'file': open('test.png', 'rb')}
-    # slack_client.api_call('files.upload', channel=slack_channel, filename='1.png', file=open('1.png', 'rb'))
-    # content = []
-    # for line in open('1.png','rb') :
-    #     content += line
-    # filename = "1.png"
-    # print("c = ",content)
-    # import io
+
     # my_file = {'file' : ('./1.png', open('./1.png', 'rb'), 'png')}
     # slack_client.api_call('files.upload', channels=[slack_channel], filename='1.png', file= open('./1.png', 'rb'))
     # payload={ "filename":"1.png","token":os.environ.get('SLACK_BOT_TOKEN'),"channels":[slack_channel],}
     # r = requests.post("https://slack.com/api/files.upload", params=payload, files=my_file)
-    # sendmsgtouser("yo")
+
+    # print(handlebasic("how many ticket of chatbot have status is equal to open"))
     while True :
         msg = getmsgfromuser()
-        processquery1(msg)
+        reply = "None"
+        intent = processquery1(msg)
+        if intent == 'basic' :
+            reply = handlebasic(msg)
+        elif intent == 'sentiment' :
+            reply = handlesentiment(msg)
+        elif intent == 'trend' :
+            reply = handletrend(msg)
+        sendmsgtouser("ans to the query is : " + reply)

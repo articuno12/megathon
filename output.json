@@ -1,0 +1,30 @@
+{
+	"select": {
+		"columns": [
+			{ "column": "ticket",
+			  "type": "None"
+			},
+			{ "column": "status",
+			  "type": "None"
+			}
+		]
+	},
+	"from": {
+		"table": "chatbot"
+	},
+	"join": {
+	},
+	"where": {
+		"condition": [
+			{ "column": "ticket",
+			  "type": "None",
+			  "operator": ">",
+			  "value": "20"
+			}
+		]
+	},
+	"group_by": {
+	},
+	"order_by": {
+	}
+}
