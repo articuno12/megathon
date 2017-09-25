@@ -10,6 +10,7 @@ cursor = db.cursor()
 
 
 def trend_analysis(ticket_no):
+    # print("ticket_no = ",ticket_no)
     tone_analyzer = ToneAnalyzerV3(
         username="cf8e860d-db2b-42d4-9cab-513221dc2665",
         password='uuVYsn4GPwRb',
@@ -18,7 +19,7 @@ def trend_analysis(ticket_no):
     # ticket_no = int(ticket_no)
     cursor.execute(query)
     comments = cursor.fetchall()
-    print(comments[0][0])
+    # print(comments)
     ans = []
     for c in comments[0][0].split(';'):
         a = c.split(':')[0]
@@ -59,6 +60,9 @@ def trend_analysis(ticket_no):
     axis.set_ylim([-2,2])
     plt.plot(res)
     #plt.show()
+    # import os
+    # os.system("rm graph.png")
     plt.savefig('graph.png')
+    plt.close()
 
 # trend_analysis(872823810)

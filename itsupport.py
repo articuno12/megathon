@@ -10,7 +10,7 @@ from slackclient import SlackClient
 from ln2sql import interface
 # starterbot's ID as an environment variable
 BOT_ID = os.environ.get("BOT_ID")
-
+print("bot is", os.environ.get('SLACK_BOT_TOKEN'))
 # instantiate Slack
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 slack_channel = 'D77U8FKV3'
@@ -59,7 +59,7 @@ def sendmsgtouser(msg) :
         print("StarterBot connected and running! --- ready to send msg")
         slack_client.api_call("chat.postMessage",channel=slack_channel,text=msg)
     else:
-        print("Connection failed. Invalid Slack token or bot ID?")
+        print("Connection failed. Invalid Slack token or bot ID? sender")
 
 def learnintent(msg,workspaceid) :
     print("was unable to indentify the intent")

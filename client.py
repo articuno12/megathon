@@ -70,6 +70,7 @@ def client_analysis(client_name):
     import os
     os.system("rm graph2.png")
     plt.savefig('graph2.png')
+    plt.close()
     # with open('data.json', 'w') as outfile:
     #     json.dump(messages, outfile)
 
